@@ -6,8 +6,6 @@ resource "aws_vpc" "this" {
   tags = { Name = "${var.project}-vpc" }
 }
 
-# ── Subnets ──────────────────────────────────────────────────────────────────
-
 resource "aws_subnet" "public" {
   count                   = length(var.public_subnet_cidrs)
   vpc_id                  = aws_vpc.this.id
@@ -27,7 +25,6 @@ resource "aws_subnet" "private" {
   tags = { Name = "${var.project}-private-${var.azs[count.index]}" }
 }
 
-# ── Internet Gateway ──────────────────────────────────────────────────────────
 
 resource "aws_internet_gateway" "this" {
   vpc_id = aws_vpc.this.id
@@ -35,7 +32,6 @@ resource "aws_internet_gateway" "this" {
   tags = { Name = "${var.project}-igw" }
 }
 
-# ── NAT Gateway (single, in first public subnet) ─────────────────────────────
 
 resource "aws_eip" "nat" {
   domain = "vpc"
@@ -52,7 +48,6 @@ resource "aws_nat_gateway" "this" {
   depends_on = [aws_internet_gateway.this]
 }
 
-# ── Route Tables ──────────────────────────────────────────────────────────────
 
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.this.id
