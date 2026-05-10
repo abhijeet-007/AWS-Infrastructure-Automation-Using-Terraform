@@ -1,29 +1,15 @@
-variable "aws_region" {
-  type    = string
-  default = "ap-south-1"
-}
-
-variable "project" {
-  type    = string
-  default = "myapp"
-}
-
-variable "vpc_cidr" {
-  type    = string
-  default = "10.0.0.0/16"
-}
-
-variable "azs" {
-  type    = list(string)
-  default = ["ap-south-1a", "ap-south-1b"]
-}
-
-variable "public_subnet_cidrs" {
-  type    = list(string)
-  default = ["10.0.1.0/24", "10.0.2.0/24"]
-}
-
-variable "private_subnet_cidrs" {
-  type    = list(string)
-  default = ["10.0.11.0/24", "10.0.12.0/24"]
-}
+variable "aws_region"            { type = string }
+variable "project"               { type = string }
+variable "vpc_cidr"              { type = string }
+variable "azs"                   { type = list(string) }
+variable "public_subnet_cidrs"   { type = list(string) }
+variable "private_subnet_cidrs"  { type = list(string) }
+variable "ecs_instance_type"     { type = string }
+variable "asg_min"               { type = number }
+variable "asg_max"               { type = number }
+variable "asg_desired"           { type = number }
+variable "task_cpu"              { type = number }
+variable "task_memory"           { type = number }
+variable "container_image"       { type = string }
+variable "app_port"              { type = number }
+variable "service_desired_count" { type = number }

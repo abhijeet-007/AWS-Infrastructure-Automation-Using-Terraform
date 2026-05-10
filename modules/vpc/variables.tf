@@ -1,5 +1,6 @@
 variable "project" {
-  type = string
+  type    = string
+  default = "myapp"
 }
 
 variable "vpc_cidr" {
